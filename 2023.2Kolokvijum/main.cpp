@@ -1,67 +1,64 @@
-#include "Kolekcija.h"
 #include <iostream>
-#include "Ispit.h"
-
+#include "Kolekcija.h"
+#include "ProsireniPodatak.h"
 
 using namespace std;
 
 void main() {
 	int maxPodataka = 8, brojPodataka = 5;
-	int test[] = { 23, 37, 28, 31, 34 };
-	const char* naziv[] = { "AIP", "UUR", "FIZ", "MAT", "EKM" };
-	int ocena[] = { 10, 10, 6, 7, 8 };
-	int espb[] = { 3, 5, 6, 5, 5 };
+	float temperature[] = { 23, 37, 28, 31, 34 };
+	float vlaznosti[] = { 21, 28, 25, 26, 23 };
+	float brzine[] = { 8, 15, 10, 12, 5 };
 	// 3 boda
 	// postavljanje i prihvatanje izuzetaka
 	{
 		// 1 bod
-		Kolekcija<int> kolekcijaA(maxPodataka);
+		Kolekcija<float> kolProst(maxPodataka);
 		// 1 bod
 		for (int i = 0; i < brojPodataka; i++)
-			kolekcijaA.DodajPodatak(test[i]);
+			kolProst.DodajPodatak(temperature[i]);
 		// 1 bod
-		cout << kolekcijaA << endl; // kolekcijaA.Ispisi(cout);
+		cout << kolProst << endl; //kolProst.Ispisi(cout);
 		// 1 bod
-		kolekcijaA.Obrisi(4);
-		cout << kolekcijaA << endl; // kolekcijaA.Ispisi(cout);
+		kolProst.Obrisi(4);
+		cout << kolProst << endl; //kolProst.Ispisi(cout);
 		// 1 bod
-		float prosecnaOcena = kolekcijaA.OdrediProsek();
-		cout << prosecnaOcena << endl;
+		float prosecnaTemperatura = kolProst.OdrediProsek();
+		cout << prosecnaTemperatura << endl;
 		// 1 bod
-		int najveciPodatak = kolekcijaA.NajveciPodatak();
+		float najveciPodatak = kolProst.NajveciPodatak();
 		cout << najveciPodatak << endl;
 		// 1 bod
-		kolekcijaA.Sacuvaj("KolekcijaA.txt");
+		kolProst.Sacuvaj("ProstiPodaci.txt");
 		// 2 boda
-		Kolekcija<int> kolekcijaATest(maxPodataka);
-		kolekcijaATest.Ucitaj("KolekcijaA.txt");
-		cout << kolekcijaATest << endl; // kolekcijaATest.Ispisi(cout);
+		Kolekcija<float> kolProstNova(maxPodataka);
+		kolProstNova.Ucitaj("ProstiPodaci.txt");
+		cout << kolProstNova << endl; //kolProstNova.Ispisi(cout);
 	}
 	{
 		// 1 bod
-		Kolekcija<Ispit> kolIspit(maxPodataka);
+		Kolekcija<ProsireniPodatak> kolProsirena(maxPodataka);
 		// 1 bod
-		for (int i = 0; i < brojPodataka; i++) 
-		{
-			Ispit* tmp = new Ispit(naziv[i], ocena[i], espb[i]);
-			kolIspit.DodajPodatak(*tmp);
+		for (int i = 0; i < brojPodataka; i++) {
+			ProsireniPodatak podatak(temperature[i], vlaznosti[i], brzine[i]);
+			kolProsirena.DodajPodatak(podatak);
 		}
 		// 1 bod
-		cout << kolIspit << endl; // kolIspit.Ispisi(cout);
+		cout << kolProsirena << endl; //kolProsirena.Ispisi(cout);
 		// 0 bodova
-		kolIspit.Obrisi(4);
-		cout << kolIspit << endl; // kolIspit.Ispisi(cout);
+		kolProsirena.Obrisi(4);
+		cout << kolProsirena << endl; //kolProsirena.Ispisi(cout);
 		// 2 boda
-		float prosecnaOcena2 = kolIspit.OdrediProsek();
-		cout << prosecnaOcena2 << endl;
+		float prosecnaSubjektivnaTemperatura = kolProsirena.OdrediProsek();
+		cout << prosecnaSubjektivnaTemperatura << endl;
 		// 2 boda
-		Ispit najveci = kolIspit.NajveciPodatak();
-		cout << najveci << endl;
+		ProsireniPodatak najveciPodatak = kolProsirena.NajveciPodatak();
+		cout << najveciPodatak << endl;
 		// 0 bod
-		kolIspit.Sacuvaj("Ispiti.txt");
+		kolProsirena.Sacuvaj("ProsireniPodaci.txt");
 		// 1 bod
-		Kolekcija<Ispit> kolIspitTest(maxPodataka);
-		kolIspitTest.Ucitaj("Ispiti.txt");
-		cout << kolIspitTest << endl; // kolIspitTest.Ispisi(cout);
+		Kolekcija<ProsireniPodatak> kolProsirenaNova(maxPodataka);
+		kolProsirenaNova.Ucitaj("ProsireniPodaci.txt");
+		cout << kolProsirenaNova << endl; //kolProsirenaNova.Ispisi(cout);
 	}
 }

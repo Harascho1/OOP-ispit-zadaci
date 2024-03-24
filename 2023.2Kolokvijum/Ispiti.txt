@@ -1,4 +1,0 @@
-AIP 10 3 
-UUR 10 5 
-FIZ 6 6 
-MAT 7 5 
